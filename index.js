@@ -17,6 +17,7 @@ app.set('view engine', 'ejs') // 设置模板引擎为 ejs
 
 // 设置静态文件目录
 app.use(express.static(path.join(__dirname, 'public')))
+
 // session 中间件
 app.use(session({
   name: config.session.key, // 设置 cookie 中保存 session id 的字段名称
@@ -30,6 +31,7 @@ app.use(session({
     url: config.mongodb// mongodb 地址
   })
 }))
+
 // flash 中间件，用来显示通知
 app.use(flash())
 
@@ -41,7 +43,7 @@ app.use(require('express-formidable')({
 
 // 设置模板全局常量
 app.locals.blog = {
-  title: pkg.name,
+  title: 'CourseSystem',
   description: pkg.description
 }
 
@@ -65,8 +67,10 @@ app.use(expressWinston.logger({
     })
   ]
 }))
+
 // 路由
 routes(app)
+
 // 错误请求的日志
 app.use(expressWinston.errorLogger({
   transports: [

@@ -1,0 +1,54 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css">
+<style>
+  .swiper-container {
+    margin-top: 30px;
+    max-width: 800px;
+    height: 400px;
+  }
+  .swiper-slide {
+    background-position: 50%;
+    background-size: cover;
+  }
+</style>
+<div class="swiper-container">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide" style="background-image:url(https://i.loli.net/2019/04/04/5ca57c318c7d4.jpg)"></div>
+    <div class="swiper-slide" style="background-image:url(https://i.loli.net/2019/04/04/5ca57c34e1ba3.jpg)"></div>
+    <div class="swiper-slide" style="background-image:url(https://i.loli.net/2019/04/04/5ca57c38634b6.jpg)"></div>
+  </div>
+  <!-- Add Pagination -->
+  <div class="swiper-pagination swiper-pagination-white"></div>
+  <!-- Add Arrows -->
+  <div class="swiper-button-next swiper-button-white"></div>
+  <div class="swiper-button-prev swiper-button-white"></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js"></script>
+<script type="text/javascript">
+  var swiper = new Swiper('.swiper-container', {
+    spaceBetween: 30,
+    effect: 'fade',
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    autoplay: {
+      delay: 4000,
+      disableOnInteraction: false,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
+
+  let swiperWrapper = document.querySelector('.swiper-wrapper')
+
+  swiperWrapper.addEventListener('mouseover', ()=>{
+    swiper.autoplay.stop();
+  })
+
+  swiperWrapper.addEventListener('mouseout', ()=>{
+    swiper.autoplay.start();
+  })
+
+</script>

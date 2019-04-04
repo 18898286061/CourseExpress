@@ -1,0 +1,31 @@
+<style>
+.ui.menu {
+  margin: 3em 0em;
+}
+.ui.menu:last-child {
+  margin-bottom: 110px;
+}
+</style>
+<div class="tabs">
+  <div class="ui grid">
+    <div class="four wide column"></div>
+
+    <div class="eight wide column">
+      <div class="ui secondary pointing menu">
+      <a class="item" href="/home">首页</a>
+      <a class="item" href="/blog">博客</a>
+      <a class="item" href="/mall">商城</a>
+      <a class="item" href="/posts">论坛</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let a = document.querySelectorAll('a')
+for(var i = 0; i < a.length; i++) {
+  if(a[i].pathname === window.location.pathname){
+    a[i].classList.add('active')
+  }
+}
+</script>

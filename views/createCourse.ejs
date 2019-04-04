@@ -1,0 +1,35 @@
+<%- include('header') %>
+
+<div class="ui grid">
+  <div class="four wide column">
+  </div>
+  <div class="eight wide column">
+    <form class="ui form segment"
+          method="post"
+          enctype="multipart/form-data">
+      <div class="field required">
+        <label>课程题目</label>
+        <input placeholder="课程题目" type="text" name="courseName">
+      </div>
+      <div class="field required">
+          <label>课程封面</label>
+          <input type="file" name="cover">
+      </div>
+      <div class="field required">
+        <label>作者</label>
+        <input placeholder="作者" type="text" name="author">
+      </div>
+      <div class="field required">
+        <label>价格</label>
+        <input placeholder="价格" type="number" name="price">
+      </div>
+      <div class="field required">
+        <label>描述</label>
+        <textarea name="description" rows="5"></textarea>
+      </div>
+      <input type="submit" class="ui button fluid" value="发布课程">
+    </form>
+  </div>
+</div>
+
+<%- include('footer') %>

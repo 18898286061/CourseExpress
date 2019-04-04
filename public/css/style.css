@@ -1,8 +1,6 @@
 /* ---------- 全局样式 ---------- */
 
 body {
-  width: 1100px;
-  height: 100%;
   margin: 0 auto;
   padding-top: 40px;
 }
@@ -36,6 +34,17 @@ a:hover {
   display: inline-block;
   margin: 10px 0;
 }
+
+/* ----------- tabs -------------- */
+.tabs {
+  text-align: center
+}
+
+.tabs a {
+  margin: 0 10px;
+  color: #4fc08d;
+}
+
 
 /* ---------- nav-setting ---------- */
 
@@ -75,4 +84,23 @@ a:hover {
 
 .post-content .tag.right a {
   color: #999;
+}
+
+/* ------- Course-Content -------- */
+.ui.card {
+  width: 300px;
+  margin: 3em 10em 0px;
+  display: inline-block;
+}
+
+
+/* -------- footer ---------- */
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #f2f2f2;
+  padding: 16px 0;
+  color: #888;
+  text-align: center;
 }
