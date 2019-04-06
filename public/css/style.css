@@ -88,9 +88,9 @@ a:hover {
 
 /* ------- Course-Content -------- */
 .ui.card {
-  width: 300px;
-  margin: 3em 10em 0px;
-  display: inline-block;
+  float: left;
+  height: 290px;
+  margin-left: 100px;
 }
 
 

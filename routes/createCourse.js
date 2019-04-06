@@ -18,6 +18,7 @@ router.post('/', checkLogin, function (req, res, next) {
   const price = parseInt(req.fields.price)
   const author = req.fields.author
   const cover = req.files.cover.path.split(path.sep).pop()
+  const vedio = req.files.vedio.path.split(path.sep).pop()
 
   // 校验参数
   try {
@@ -42,6 +43,10 @@ router.post('/', checkLogin, function (req, res, next) {
       if (err) throw err;
       console.log('文件已删除');
     })
+    fs.unlink(req.files.vedio.path, (err) => {
+      if (err) throw err;
+      console.log('文件已删除');
+    })
     req.flash('error', e.message)
     return res.redirect('/createCourse')
   }
@@ -52,7 +57,8 @@ router.post('/', checkLogin, function (req, res, next) {
     description: description,
     price: price,
     author: author,
-    cover: cover
+    cover: cover,
+    vedio: vedio
   }
   // 课程信息写入数据库
   CourseModel.create(course)
