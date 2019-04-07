@@ -3,16 +3,14 @@ const router = express.Router()
 const CourseModel = require('../models/courses')
 var ObjectId = require('mongodb').ObjectID;
 
-// GET /mall 所有用户或者特定用户的首页
-//   eg: GET /mall?author=xxx
+// GET /mall 所有用户的商品页
+// or GET /mall?user=xxx  或者特定用户的我的课程页面
 router.get('/', function (req, res, next) {
   const author = req.query.author
-  const userId = req.session.user._id
   CourseModel.getCourse(author)
     .then(function (course) {
       res.render('mall', {
-        course: course,
-        userId: userId
+        course: course
       })
     })
     .catch(next)

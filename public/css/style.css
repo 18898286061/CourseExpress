@@ -87,10 +87,27 @@ a:hover {
 }
 
 /* ------- Course-Content -------- */
+.clearfix:after{
+  content: "020";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+  }
+.clearfix {
+  /* 触发 hasLayout */
+  zoom: 1;
+  }
+
+
 .ui.card {
   float: left;
   height: 290px;
   margin-left: 100px;
+}
+
+.ui.card>.image:not(.ui)>img {
+  height: 140px;
 }
 
 

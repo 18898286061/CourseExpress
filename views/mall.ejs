@@ -1,11 +1,11 @@
 <%- include('header') %>
 
 <%- include('components/tabs') %>
-
+<div class="clearfix">
 <% course.forEach(function (course) { %>
   <%- include('components/course-content', { course: course }) %>
 <% }) %>
-
+</div>
 <%- include('footer') %>
 <script>
 $(document).ready(function() {

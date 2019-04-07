@@ -29,6 +29,6 @@ module.exports = {
   },
   // 添加课程用户
   updateCourseUser: function updateCourseUser (courseId, user) {
-    return Course.update({ _id: courseId }, { $push: { corseUser: user }}).exec()
+    return Course.update({ _id: courseId }, { $push: { courseUser: user }}).exec()
   },
 }
