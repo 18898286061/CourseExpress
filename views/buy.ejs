@@ -1,31 +1,41 @@
 <%- include('header') %>
 
 <%- include('components/tabs') %>
-
-<div style="margin: 0 auto">
+<div class="buy">
   <img src="/img/<%= course.cover %>" style="width: 300px; border-radius: 2px">
-
   <ul>
     <li>课程名称：<%= course.courseName %></li>
     <li>作者：<%= course.author %></li>
     <li>详情：<%- course.description %></li>
     <li>购买价格：￥<%- course.price %></li>
+    <li>提示：此课程你还未购买，如需要购买，请点击支付按钮</li>
   </ul>
-
   <div class="ui vertical animated button" tabindex="0">
-    <div class="hidden content"><form method="post"><input type="submit" class="ui button" value="支付"></form></div>
+    <div class="hidden content">
+      <form method="post">
+        <input type="submit" class="ui button" value="支付">
+      </form>
+    </div>
     <div class="visible content">
         <i class="shop icon"></i>
     </div>
   </div>
 </div>
-<!-- <script>
-$('.ui.vertical.animated.button').on('click', function(){
-  $.ajax({
-    method: "POST",
-    url: `${window.location.href}`,
-  })
-})
-</script> -->
+
+<script>
+var json = '<%= course.courseUser %>'
+var vedio = `
+
+<video width="320" height="240" controls>
+  <source src="/img/<%= course.vedio %>" type="video/mp4">
+  您的浏览器不支持 HTML5 video 标签
+</video>`
+json = json.split(",");
+for(var i = 0; i < json.length; i++) {
+  if(json[i] === '<%= user._id %>'){
+    $('.buy').replaceWith(vedio)
+  }
+}
+</script>
 
 <%- include('footer') %>

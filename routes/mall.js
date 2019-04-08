@@ -36,7 +36,7 @@ router.get('/:courseId', function (req, res, next) {
 })
 
 
-// POST /mall/ 商品支付页面
+// POST /mall/  POST 商品支付
 router.post('/:courseId', function (req, res, next) {
   const courseId = req.params.courseId
   let courseUser = ObjectId(req.session.user._id).toString()

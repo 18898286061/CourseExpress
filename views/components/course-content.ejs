@@ -14,7 +14,7 @@
         <div class="content">
           <div class="center">
               <% if (user) { %>
-                <div class="ui teal button"><a href="/mall/<%= course._id %>">购买</a></div>
+                <div class="ui teal button"><a href="/mall/<%= course._id %>">进入</a></div>
               <% } else { %>
                 <div class="ui teal button" style="background-color: #ccc !important;">未登录</div>
               <% } %>
@@ -24,8 +24,6 @@
       <img src="/img/<%= course.cover %>">
     </div>
     <div class="content">
-      <div><p>课程用户：<%= course.courseUser %></p></div>
-      <div><p>用户ID：<%= user._id %></p></div>
       <div class="header"><%= course.courseName %></div>
       <div class="meta">
         <a class="group">作者：<%= course.author %></a>
@@ -33,13 +31,3 @@
       <div class="description"><%- course.description %></div>
     </div>
   </div>
-
-<script>
-  var json = '<%= course.courseUser %>'
-  json = json.split(",");
-  for(var i = 0; i < json.length; i++) {
-    if(json[i] === '<%= user._id %>'){
-      $('.ui.teal.button').replaceWith('<div class="ui teal button"><a href="">观看</a></div>')
-    }
-  }
-</script>
