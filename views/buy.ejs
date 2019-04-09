@@ -8,6 +8,7 @@
     <li>作者：<%= course.author %></li>
     <li>详情：<%- course.description %></li>
     <li>购买价格：￥<%- course.price %></li>
+    <li class="buyAmount"></li>
     <li>提示：此课程你还未购买，如需要购买，请点击支付按钮</li>
   </ul>
   <div class="ui vertical animated button" tabindex="0">
@@ -31,11 +32,16 @@ var vedio = `
   您的浏览器不支持 HTML5 video 标签
 </video>`
 json = json.split(",");
+var jsonLength = json.length
 for(var i = 0; i < json.length; i++) {
   if(json[i] === '<%= user._id %>'){
     $('.buy').replaceWith(vedio)
   }
 }
+if(json[0] === ""){
+  jsonLength = jsonLength - 1
+}
+$('.buyAmount').replaceWith(`<li>购买量：${jsonLength}</li>`)
 </script>
 
 <%- include('footer') %>

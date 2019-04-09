@@ -5,7 +5,6 @@
       <div class="menu">
         <% if (user) { %>
           <a class="item" href="/posts?author=<%= user._id %>">我的帖子</a>
-          <a class="item" href="/mall?user=<%= user._id %>">我的课程</a>
           <div class="divider"></div>
           <a class="item" href="/posts/create">发表文章</a>
           <a class="item" href="/createCourse">创建课程</a>

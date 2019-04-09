@@ -1,0 +1,44 @@
+<%- include('header') %>
+<style>
+.ui.menu {margin: 3em 0em;}
+.ui.menu:last-child {margin-bottom: 30px;}
+</style>
+<div class="tabs">
+  <div class="ui grid">
+    <div class="four wide column"></div>
+    <div class="eight wide column">
+      <div class="ui secondary pointing menu">
+      <a class="item" href="/admin">管理论坛</a>
+      <a class="item" href="/admin/course">管理课程</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="course-tabel">
+    <table class="ui celled table">
+      <thead>
+        <tr>
+          <th>帖子名称</th>
+          <th>作者</th>
+          <th>内容</th>
+          <th>创建时间</th>
+          <th>浏览量</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% posts.forEach(function (post) { %>
+          <%- include('components/admin-postsContent', { post: post }) %>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+<script>
+let a = document.querySelectorAll('a')
+for(var i = 0; i < a.length; i++) {
+  if(a[i].pathname === window.location.pathname){
+    a[i].classList.add('active')
+  }
+}
+</script>
+<%- include('footer') %>

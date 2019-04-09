@@ -8,9 +8,9 @@ module.exports = function (app) {
   app.use('/posts', require('./posts'))
   app.use('/comments', require('./comments'))
   app.use('/home', require('./home'))
-  app.use('/blog', require('./blog'))
   app.use('/mall', require('./mall'))
   app.use('/createCourse', require('./createCourse'))
+  app.use('/admin', require('./admin'))
   // 404 page
   app.use(function (req, res) {
     if (!res.headersSent) {

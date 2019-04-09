@@ -1,0 +1,11 @@
+<tr>
+  <td data-label="Name"><%= post.title %></td>
+  <td data-label="Age"><%= post.author.name %></td>
+  <td data-label="Job"><%- post.content %></td>
+  <td><%= post.created_at %></td>
+  <td><%= post.pv || 0 %></td>
+  <td>
+    <button class="ui primary basic button"><a href="/admin/<%= post._id %>/edit">编辑</a></button>
+    <button class="ui negative basic button"><a href="/admin/<%= post._id %>/remove" style="color: red">删除</a></button>
+  </td>
+</tr>

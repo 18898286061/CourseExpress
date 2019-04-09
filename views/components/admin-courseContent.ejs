@@ -1,0 +1,25 @@
+<tr>
+  <td><%= course.courseName %></td>
+  <td><%= course.author %></td>
+  <td><img src="/img/<%- course.cover %>" alt="cover" width="100px"></td>
+  <td><%= course.created_at %></td>
+  <td><%= course.price %></td>
+
+  <td class="courseUser"><%= course.courseUser %></td>
+  <td width="300"><%= course.description %></td>
+  <td>
+    <button class="ui primary basic button"><a href="/admin/<%= course._id %>/edit">编辑</a></button>
+    <button class="ui negative basic button"><a href="/admin/<%= course._id %>/remove" style="color: red">删除</a></button>
+  </td>
+</tr>
+
+<script>
+  var amount = '<%= course.courseUser %>'
+  var amountArr = amount.split(",")
+  var amountArrLength = amountArr.length
+
+  if(amountArr[0] === ""){
+    amountArrLength = amountArrLength - 1
+}
+  $(".courseUser").replaceWith(`<td>${amountArrLength}</td>`)
+</script>

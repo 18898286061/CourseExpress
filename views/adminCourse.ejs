@@ -1,0 +1,54 @@
+<%- include('header') %>
+<style>
+.ui.menu {margin: 3em 0em;}
+.ui.menu:last-child {margin-bottom: 30px;}
+</style>
+
+<div class="ui category search">
+  <div class="ui icon input">
+    <input class="prompt" type="text" placeholder="Search animals...">
+    <i class="search icon"></i>
+  </div>
+  <div class="results"></div>
+</div>
+<div class="tabs">
+  <div class="ui grid">
+    <div class="four wide column"></div>
+    <div class="eight wide column">
+      <div class="ui secondary pointing menu">
+      <a class="item" href="/admin">管理论坛</a>
+      <a class="item" href="/admin/course">管理课程</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="course-tabel">
+    <table class="ui celled table">
+      <thead>
+        <tr>
+          <th>课程名称</th>
+          <th>作者</th>
+          <th>封面</th>
+          <th>创建时间</th>
+          <th>价格</th>
+          <th>购买量</th>
+          <th>课程详情</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% course.forEach(function (course) { %>
+          <%- include('components/admin-courseContent', { course: course }) %>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+<script>
+let a = document.querySelectorAll('a')
+for(var i = 0; i < a.length; i++) {
+  if(a[i].pathname === window.location.pathname){
+    a[i].classList.add('active')
+  }
+}
+</script>
+<%- include('footer') %>
