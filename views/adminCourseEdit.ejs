@@ -1,0 +1,27 @@
+<%- include('header') %>
+
+<div class="ui grid">
+  <div class="four wide column">
+
+  </div>
+
+  <div class="eight wide column">
+    <form class="ui form segment" method="post" action="/admin/<%= course._id %>/courseEdit">
+      <div class="field required">
+        <label>课程名</label>
+        <input type="text" name="courseName" value="<%= course.courseName %>">
+      </div>
+      <div class="field required">
+        <label>作者</label>
+        <input type="text" name="author" value="<%= course.author %>">
+      </div>
+      <div class="field required">
+        <label>详情</label>
+        <textarea name="description" rows="8"><%= course.description %></textarea>
+      </div>
+      <input type="submit" class="ui button" value="发布">
+    </form>
+  </div>
+</div>
+
+<%- include('footer') %>

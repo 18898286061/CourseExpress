@@ -31,4 +31,14 @@ module.exports = {
   updateCourseUser: function updateCourseUser (courseId, user) {
     return Course.update({ _id: courseId }, { $push: { courseUser: user }}).exec()
   },
+  // 通过id获取课程 以修改
+  getRawCourseById: function getRawCourseById (courseId) {
+    return Course
+      .findOne({ _id: courseId })
+      .populate({ path: 'author', model: 'User' })
+      .exec()
+  },
+  updateCourseById: function updateCourseById (courseId, data) {
+    return Course.update({ _id: courseId }, { $set: data }).exec()
+  }
 }
