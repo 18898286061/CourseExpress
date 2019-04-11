@@ -1,0 +1,31 @@
+<%- include('header') %>
+
+<div class="ui grid">
+  <div class="four wide column">
+
+  </div>
+
+  <div class="eight wide column">
+    <form class="ui form segment" method="post">
+      <div class="field required">
+        <label>用户名</label>
+        <input type="text" name="name" value="<%= user.name %>">
+      </div>
+      <div class="field required">
+        <label>性别</label>
+        <select class="ui compact selection dropdown" name="gender">
+          <option value="m">男</option>
+          <option value="f">女</option>
+          <option value="x">保密</option>
+        </select>
+      </div>
+      <div class="field required">
+        <label>个人简介</label>
+        <textarea name="bio" rows="5"><%= user.bio %></textarea>
+      </div>
+      <input type="submit" class="ui button" value="更改">
+    </form>
+  </div>
+</div>
+
+<%- include('footer') %>

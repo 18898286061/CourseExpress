@@ -2,9 +2,12 @@ const express = require('express')
 const router = express.Router()
 const PostModel = require('../models/posts')
 const CourseModel = require('../models/courses')
+const UserModel = require('../models/users')
+
+const checkAdminLogin = require('../middlewares/check').checkAdminLogin
 
 // GET /admin 管理论坛
-router.get('/', function (req, res, next) {
+router.get('/', checkAdminLogin, function (req, res, next) {
   PostModel.getPosts()
     .then(function (posts) {
       res.render('admin', {
@@ -14,8 +17,8 @@ router.get('/', function (req, res, next) {
     .catch(next)
 })
 
-// GET /admin 管理课程表
-router.get('/course', function (req, res, next) {
+// GET /admin/course 管理课程表
+router.get('/course', checkAdminLogin, function (req, res, next) {
   CourseModel.getCourse()
     .then(function (course) {
       res.render('adminCourse', {
@@ -25,9 +28,21 @@ router.get('/course', function (req, res, next) {
     .catch(next)
 })
 
+// GET /admin/user 管理用户表
+router.get('/user', checkAdminLogin, function (req, res, next) {
+  UserModel.getUsers()
+    .then(function (user) {
+      res.render('adminUser', {
+        user: user
+      })
+    })
+    .catch(next)
+})
+
+
 
 // GET /admin/:postId/edit 管理员更新文章页
-router.get('/:postId/edit', function (req, res, next) {
+router.get('/:postId/edit', checkAdminLogin, function (req, res, next) {
   const postId = req.params.postId
 
   PostModel.getRawPostById(postId)
@@ -43,7 +58,7 @@ router.get('/:postId/edit', function (req, res, next) {
 })
 
 // GET /admin/:courseId/courseEdit 管理员更新课程页
-router.get('/:courseId/courseEdit', function (req, res, next) {
+router.get('/:courseId/courseEdit', checkAdminLogin, function (req, res, next) {
   const courseId = req.params.courseId
 
   CourseModel.getRawCourseById(courseId)
@@ -59,7 +74,7 @@ router.get('/:courseId/courseEdit', function (req, res, next) {
 })
 
 // POST /admin/:postId/edit 更新一篇文章
-router.post('/:postId/edit', function (req, res, next) {
+router.post('/:postId/edit', checkAdminLogin, function (req, res, next) {
   const postId = req.params.postId
   const title = req.fields.title
   const content = req.fields.content
@@ -92,7 +107,7 @@ router.post('/:postId/edit', function (req, res, next) {
     })
 })
 // POST /admin/:postId/Courseedit 更新一个课程
-router.post('/:courseId/courseEdit', function (req, res, next) {
+router.post('/:courseId/courseEdit', checkAdminLogin, function (req, res, next) {
   const courseId = req.params.courseId
   const courseName = req.fields.courseName
   const author = req.fields.author
@@ -127,7 +142,7 @@ router.post('/:courseId/courseEdit', function (req, res, next) {
 })
 
 // GET /admin/:postId/remove 删除一篇文章  /admin/<%= post._id %>/remove
-router.get('/:postId/remove', function (req, res, next) {
+router.get('/:postId/remove', checkAdminLogin, function (req, res, next) {
   const postId = req.params.postId
 
   PostModel.getRawPostById(postId)
@@ -147,7 +162,7 @@ router.get('/:postId/remove', function (req, res, next) {
 
 
 // GET /admin/:postId/edit 管理员更新文章页
-router.get('/:postId/edit', function (req, res, next) {
+router.get('/:postId/edit', checkAdminLogin, function (req, res, next) {
   const postId = req.params.postId
 
   PostModel.getRawPostById(postId)

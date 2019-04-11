@@ -1,0 +1,10 @@
+<tr>
+  <td><%= user.name %></td>
+  <td><img src="/img/<%= user.avatar %>" alt="cover" width="100px"></td>
+  <td><%= user.gender %></td>
+  <td width="300"><%= user.bio %></td>
+  <td>
+    <button class="ui primary basic button"><a href="/admin/<%= user._id %>/courseEdit">编辑</a></button>
+    <button class="ui negative basic button"><a href="/admin/<%= user._id %>/courseRemove" style="color: red">删除</a></button>
+  </td>
+</tr>

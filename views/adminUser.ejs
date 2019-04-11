@@ -4,17 +4,16 @@
     <table class="ui celled table">
       <thead>
         <tr>
-          <th>帖子名称</th>
-          <th>作者</th>
-          <th>内容</th>
-          <th>创建时间</th>
-          <th>浏览量</th>
+          <th>用户名</th>
+          <th>头像</th>
+          <th>性别</th>
+          <th>个人简介</th>
           <th>操作</th>
         </tr>
       </thead>
       <tbody>
-        <% posts.forEach(function (post) { %>
-          <%- include('components/admin-postsContent', { post: post }) %>
+        <% user.forEach(function (user) { %>
+          <%- include('components/admin-userContent', { user: user }) %>
         <% }) %>
       </tbody>
     </table>
