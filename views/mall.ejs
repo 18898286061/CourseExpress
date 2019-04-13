@@ -1,11 +1,13 @@
 <%- include('header') %>
 
 <%- include('components/tabs') %>
-<div class="clearfix">
+<!-- <div class="clearfix"> -->
+<div class="flex-course">
 <% course.forEach(function (course) { %>
   <%- include('components/course-content', { course: course }) %>
 <% }) %>
 </div>
+<!-- </div> -->
 <%- include('footer') %>
 <script>
 $(document).ready(function() {

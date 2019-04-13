@@ -43,7 +43,7 @@ app.use(require('express-formidable')({
 
 // 设置模板全局常量
 app.locals.blog = {
-  title: 'CourseSystem',
+  title: '网课系统',
   description: pkg.description
 }
 

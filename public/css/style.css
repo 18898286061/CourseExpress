@@ -80,31 +80,37 @@ body {
 }
 
 /* ------- Course-Content -------- */
-.clearfix:after{
+.flex-course {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.flex-course .ui.card {
+  margin-left: 70px;
+  margin-right: 70px;
+}
+.ui.card:first-child {
+  margin-top: 1em; /*修复第一个网上移动的Bug*/
+}
+.ui.card>.image>img,
+.ui.cards>.card>.image>img{
+  height: 150px;
+}
+/* .clearfix:after{
   content: "020";
   display: block;
   height: 0;
   clear: both;
   visibility: hidden;
   }
-.clearfix {
-  /* 触发 hasLayout */
-  zoom: 1;
-  }
-
 
 .ui.card {
   float: left;
   height: 290px;
   margin: 0px 0px 2em 0px;
   margin-left: 100px;
-
-}
-
-.ui.card>.image:not(.ui)>img {
-  height: 140px;
-}
-
+} */
 
 /* -------- footer ---------- */
 .footer {
