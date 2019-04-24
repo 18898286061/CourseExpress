@@ -1,7 +1,7 @@
 <%- include('header') %>
 <%- include('components/adminHeader') %>
 <div class="course-tabel">
-    <table class="ui celled table">
+    <table class="ui celled table" id="table">
       <thead>
         <tr>
           <th>用户名</th>
@@ -18,6 +18,7 @@
       </tbody>
     </table>
   </div>
+
 <script>
 let a = document.querySelectorAll('a')
 for(var i = 0; i < a.length; i++) {
@@ -25,5 +26,43 @@ for(var i = 0; i < a.length; i++) {
     a[i].classList.add('active')
   }
 }
+
+let prompt = document.querySelector('.prompt')
+
+
+var table = document.getElementById('table')
+console.log(table.rows.length)
+console.log(table.rows)
+console.dir(table.rows[0].innerText)
+
+var trs = table.rows
+var trsArr = [...trs] // HTMLCollection转换为数组
+console.log(trsArr)
+
+prompt.addEventListener("keyup", function(event){
+  if(event.keyCode === 13){
+      var searchValue = prompt.value
+      let searchArr = fuzzyQuery(trs, searchValue);
+      console.log(searchArr)
+      for(let i = 0; i < searchArr.length; i++) {
+        let result = searchArr[i].innerHTML
+        console.log(result)
+        $('tbody').replaceWith(result)
+        console.log($('tbody'))
+      }
+  }
+})
+
+function fuzzyQuery(list, searchValue) {
+  var searchArr = [];
+  for(let i = 0; i < table.rows.length; i++) {
+    if(list[i].innerText.indexOf(searchValue) >= 0) {
+      searchArr.push(list[i]);
+    }
+  }
+  // console.log(searchArr)
+  return searchArr
+}
+
 </script>
 <%- include('footer') %>

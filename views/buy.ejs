@@ -1,15 +1,26 @@
 <%- include('header') %>
 
 <%- include('components/tabs') %>
+<style>
+.buy{
+  max-width: 700px;
+  margin: 0 auto;
+}
+ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+</style>
 <div class="buy">
-  <img src="/img/<%= course.cover %>" style="width: 300px; border-radius: 2px">
+  <h1><%= course.courseName %></h1>
+  <img src="/img/<%= course.cover %>" style="width: 500px; border-radius: 2px">
   <ul>
-    <li>课程名称：<%= course.courseName %></li>
     <li>作者：<%= course.author %></li>
     <li>详情：<%- course.description %></li>
     <li>购买价格：￥<%- course.price %></li>
     <li class="buyAmount"></li>
-    <li>提示：此课程你还未购买，如需要购买，请点击支付按钮</li>
+    <li style="color: red">提示：此课程你还未购买，如需要购买，请点击支付按钮</li>
   </ul>
   <div class="ui vertical animated button" tabindex="0">
     <div class="hidden content">
@@ -26,11 +37,12 @@
 <script>
 var json = '<%= course.courseUser %>'
 var vedio = `
-
-<video width="320" height="240" controls>
-  <source src="/img/<%= course.vedio %>" type="video/mp4">
-  您的浏览器不支持 HTML5 video 标签
-</video>`
+<div class="vidioWrapper" style="width: 620px; margin: 0 auto; text-align: center">
+  <video width="600" controls>
+    <source src="/img/<%= course.vedio %>" type="video/mp4">
+    您的浏览器不支持 HTML5 video 标签
+  </video>
+</div>`
 json = json.split(",");
 var jsonLength = json.length
 for(var i = 0; i < json.length; i++) {

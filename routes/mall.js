@@ -22,7 +22,6 @@ router.get('/:courseId', function (req, res, next) {
 
   Promise.all([
     CourseModel.getCourseById(courseId),
-    // PostModel.incPv(postId)// pv 加 1 (购买数量)
   ]).then(function (result) {
       const course = result[0]
       if (!course) {

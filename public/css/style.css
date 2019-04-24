@@ -23,7 +23,6 @@ body {
 }
 
 .nav h1 {
-  color: #4fc08d;
   display: inline-block;
   margin: 10px 0;
 }
@@ -35,7 +34,6 @@ body {
 
 .tabs a {
   margin: 0 10px;
-  color: #4fc08d;
 }
 
 
@@ -61,7 +59,7 @@ body {
 /* ---------- post-content ---------- */
 
 .post-content h3 a {
-  color: #4fc08d !important;
+
 }
 
 .post-content .tag {
@@ -97,14 +95,15 @@ body {
 .ui.cards>.card>.image>img{
   height: 150px;
 }
-/* .clearfix:after{
+
+.clearfix:after{
   content: "020";
   display: block;
   height: 0;
   clear: both;
   visibility: hidden;
   }
-
+/*
 .ui.card {
   float: left;
   height: 290px;
