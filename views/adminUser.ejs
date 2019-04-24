@@ -44,12 +44,13 @@ prompt.addEventListener("keyup", function(event){
       var searchValue = prompt.value
       let searchArr = fuzzyQuery(trs, searchValue);
       console.log(searchArr)
+      let result = ''
       for(let i = 0; i < searchArr.length; i++) {
-        let result = searchArr[i].innerHTML
+        result = result.concat(`<tr>${searchArr[i].innerHTML}</tr>`)
         console.log(result)
-        $('tbody').replaceWith(result)
-        console.log($('tbody'))
       }
+      $('tbody').replaceWith(result)
+      console.log($('tbody'))
   }
 })
 
