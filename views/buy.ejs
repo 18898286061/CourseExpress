@@ -1,6 +1,5 @@
 <%- include('header') %>
 
-<%- include('components/tabs') %>
 <style>
 .buy{
   max-width: 700px;
@@ -20,7 +19,7 @@ ul{
     <li>详情：<%- course.description %></li>
     <li>购买价格：￥<%- course.price %></li>
     <li class="buyAmount"></li>
-    <li style="color: red">提示：此课程你还未购买，如需要购买，请点击支付按钮</li>
+    <li style="color: red">提示：此课程你还未参加，请点击按钮立即参加</li>
   </ul>
   <div class="ui vertical animated button" tabindex="0">
     <div class="hidden content">
@@ -53,7 +52,7 @@ for(var i = 0; i < json.length; i++) {
 if(json[0] === ""){
   jsonLength = jsonLength - 1
 }
-$('.buyAmount').replaceWith(`<li>购买量：${jsonLength}</li>`)
+$('.buyAmount').replaceWith(`<li>已有：${jsonLength}参加</li>`)
 </script>
 
 <%- include('footer') %>

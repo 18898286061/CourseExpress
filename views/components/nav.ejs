@@ -1,10 +1,52 @@
-<div class="nav">
-  <div class="ui grid">
-    <div class="four wide column"></div>
+<style>
+.ui.fixed.inverted.menu
+.header.item{
+  font-size: 20px;
+}
 
-    <div class="eight wide column">
-      <a href="/"><h1><%= blog.title %></h1></a>
-      <p><%= blog.description %></p>
+svg {
+  font-size: 40px;
+}
+.iconFont {
+    width: 1em; height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
+
+.ui.container .item {
+  padding: 10px 14px 10px 14px;
+}
+</style>
+<div class="ui fixed inverted menu">
+  <div class="ui container">
+    <a href="/" class="header item">
+      <svg class="iconFont" aria-hidden="true">
+          <use xlink:href="#icon-course"></use>
+      </svg>
+      <p><%= blog.title %></p>
+    </a>
+    <a href="/home" class="item">主页</a>
+    <a href="/mall" class="item">课程 & 商城</a>
+    <a href="/posts" class="item">论坛</a>
+
+
+    <div class="ui simple dropdown item">
+      个人中心 <i class="dropdown icon"></i>
+      <div class="menu">
+          <% if (user) { %>
+            <a class="item" href="/posts?author=<%= user._id %>">我的帖子</a>
+            <a class="item" href="/user/<%= user._id %>/changeInfo">我的资料</a>
+            <div class="divider"></div>
+            <a class="item" href="/posts/create">发表文章</a>
+            <a class="item" href="/signout">登出</a>
+          <% } else { %>
+            <a class="item" href="/signin">登录</a>
+            <a class="item" href="/signup">注册</a>
+          <% } %>
+        </div>
     </div>
   </div>
 </div>
+<!-- <%= blog.description %> -->
+<script src="//at.alicdn.com/t/font_1117999_z4hjzwwtx4.js"></script>

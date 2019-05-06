@@ -2,10 +2,12 @@
 
 body {
   margin: 0 auto;
-  padding-top: 40px;
+  padding-top: 76px;
 }
 
-
+a {
+  color: #00b5ad;
+}
 
 .avatar {
   border-radius: 3px;
@@ -25,35 +27,6 @@ body {
 .nav h1 {
   display: inline-block;
   margin: 10px 0;
-}
-
-/* ----------- tabs -------------- */
-.tabs {
-  text-align: center
-}
-
-.tabs a {
-  margin: 0 10px;
-}
-
-
-/* ---------- nav-setting ---------- */
-
-.nav-setting {
-  position: fixed;
-  right: 30px;
-  top: 35px;
-  z-index: 999;
-}
-
-.nav-setting .ui.dropdown.button {
-  padding: 10px 10px 0 10px;
-  background-color: #fff !important;
-}
-
-.nav-setting .icon.bars {
-  color: #000;
-  font-size: 18px;
 }
 
 /* ---------- post-content ---------- */
