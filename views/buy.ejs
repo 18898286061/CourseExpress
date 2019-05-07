@@ -13,7 +13,9 @@ ul{
 </style>
 <div class="buy">
   <h1><%= course.courseName %></h1>
-  <img src="/img/<%= course.cover %>" style="width: 500px; border-radius: 2px">
+  <div className="imgWrapper" style="width: 500px; height: 220px; border-radius: 2px; overflow: hidden;">
+    <img src="/img/<%= course.cover %>" style="width: 100%;"/>
+  </div>
   <ul>
     <li>作者：<%= course.author %></li>
     <li>详情：<%- course.description %></li>
@@ -52,7 +54,7 @@ for(var i = 0; i < json.length; i++) {
 if(json[0] === ""){
   jsonLength = jsonLength - 1
 }
-$('.buyAmount').replaceWith(`<li>已有：${jsonLength}参加</li>`)
+$('.buyAmount').replaceWith(`<li>已有：${jsonLength} 人参加该课程</li>`)
 </script>
 
 <%- include('footer') %>

@@ -17,6 +17,9 @@ router.post('/', checkLogin, function (req, res, next) {
   const description = req.fields.description
   const price = parseInt(req.fields.price)
   const author = req.fields.author
+  const question = req.fields.question
+  const answer = req.fields.answer
+  const task = req.fields.task
   const cover = req.files.cover.path.split(path.sep).pop()
   const vedio = req.files.vedio.path.split(path.sep).pop()
 
@@ -58,7 +61,10 @@ router.post('/', checkLogin, function (req, res, next) {
     price: price,
     author: author,
     cover: cover,
-    vedio: vedio
+    vedio: vedio,
+    qestion : question,
+    answer: answer,
+    task: task
   }
   // 课程信息写入数据库
   CourseModel.create(course)

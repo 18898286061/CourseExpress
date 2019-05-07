@@ -40,5 +40,13 @@ module.exports = {
   },
   updateCourseById: function updateCourseById (courseId, data) {
     return Course.update({ _id: courseId }, { $set: data }).exec()
+  },
+
+  // 通过用户 id 和文章 id 删除一篇文章
+  delCourseById: function delPostById (courseId) {
+    // return Post.deleteOne({  _id: postId, author: author })
+    return Course
+      .deleteOne({  _id: courseId })
+      .exec()
   }
 }

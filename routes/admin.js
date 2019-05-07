@@ -160,6 +160,26 @@ router.get('/:postId/remove', checkAdminLogin, function (req, res, next) {
     })
 })
 
+// GET /admin/:postId/remove 删除一个课程  /admin/<%= post._id %>/remove
+router.get('/:courseId/courseRemove', checkAdminLogin, function (req, res, next) {
+  const courseId = req.params.courseId
+
+  CourseModel.getRawCourseById(courseId)
+    .then(function (course) {
+      console.log(course + '111')
+      if (!course) {
+        throw new Error('该课程不存在')
+      }
+      CourseModel.delCourseById(courseId)
+        .then(function () {
+          req.flash('success', '删除课程成功')
+          // 删除成功后跳转到主页
+          res.redirect('/admin')
+        })
+        .catch(next)
+    })
+})
+
 
 // GET /admin/:postId/edit 管理员更新文章页
 router.get('/:postId/edit', checkAdminLogin, function (req, res, next) {
