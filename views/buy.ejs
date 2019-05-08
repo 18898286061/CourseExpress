@@ -10,7 +10,28 @@ ul{
   margin: 0;
   padding: 0;
 }
+
 </style>
+<script>
+let leftWrapper =`
+<div class="LeftWrapper"
+    style="width: 200px;
+    background: #ddd;
+    margin-top: -16px;
+    float: left;
+    height: 100vh;">
+  <h1 style="text-align: center"><%= course.courseName %></h1>
+  <div className="imgWrapper" style="margin: 0 auto; width: 150px; border-radius: 2px; overflow: hidden;">
+    <img src="/img/<%= course.cover %>" style="width: 100%; border-radius: 6px;"/>
+  </div>
+  <div style="border-radius: 6px";>
+    <div onclick=replaceVedio() style="cursor:pointer; margin:0 auto; text-align: center; height: 40px; line-height: 36px; font-size: 18px; width: 98%; background: #fff; border-bottom: 1px solid #efefef">视频课件</div>
+    <div onclick=replaceTask() style="cursor:pointer; margin:0 auto; text-align: center; height: 40px; line-height: 36px; font-size: 18px; width: 98%; background: #fff;">课堂作业</div>
+  </div>
+</div>
+`
+document.getElementsByTagName('body')[0].innerHTML += leftWrapper
+</script>
 <div class="buy">
   <h1><%= course.courseName %></h1>
   <div className="imgWrapper" style="width: 500px; height: 220px; border-radius: 2px; overflow: hidden;">
@@ -36,6 +57,10 @@ ul{
 </div>
 
 <script>
+// 作业代码
+let answers = '<%= course.taskAnswer %>'
+let answersArray = answers.split(',')
+
 var json = '<%= course.courseUser %>'
 var vedio = `
 <div class="vidioWrapper" style="width: 620px; margin: 0 auto; text-align: center">
@@ -43,7 +68,43 @@ var vedio = `
     <source src="/img/<%= course.vedio %>" type="video/mp4">
     您的浏览器不支持 HTML5 video 标签
   </video>
-</div>`
+</div>
+`
+
+const courseTask = `
+<div class="courseTask" style="margin: 0px auto; max-width: 700px">
+  <h1 style="">课堂作业</h1>
+  <h2 style=""><%= course.taskQuetion %></h2>
+  <div class="answerWrapper" style="margin: 0 auto">
+    <p><input type="radio" name="choose" data-type="answer1" style="margin-right: 8px;"/>${answersArray[0]}</p>
+    <p><input type="radio" name="choose" data-type="answer2" style="margin-right: 8px;"/>${answersArray[1]}</p>
+    <p><input type="radio" name="choose" data-type="answer3" style="margin-right: 8px;"/>${answersArray[2]}</p>
+    <p><input type="radio" name="choose" data-type="answer4" style="margin-right: 8px;"/>${answersArray[3]}</p>
+  </div>
+  <button onclick=submitTask() style="margin-top: 20px;">提交</button>
+</div>
+`
+// 判断看看里面的data atributte 是否和 数据库的答案相等
+
+function submitTask() {
+  let inputArr = document.querySelectorAll('input')
+  for (var i = 0; i < inputArr.length; i++) {
+    if (inputArr[i].checked == true) {
+      inputArr[i].dataset.type === '<%= course.answerRadio %>' ? alert('正确') : alert('错误')
+    }
+  }
+}
+
+function replaceTask() {
+  console.log(2)
+  $('.vidioWrapper').replaceWith(courseTask)
+}
+function replaceVedio() {
+  console.log(1)
+  $('.courseTask').replaceWith(vedio)
+}
+
+
 json = json.split(",");
 var jsonLength = json.length
 for(var i = 0; i < json.length; i++) {

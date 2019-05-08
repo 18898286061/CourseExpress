@@ -42,7 +42,7 @@ router.post('/:courseId', function (req, res, next) {
 
 
   CourseModel.updateCourseUser(courseId, courseUser)
-    .then(function (result) {
+    .then(function () {
       req.flash('success', '购买成功')
       // 购买完成
       res.redirect(`/mall`)

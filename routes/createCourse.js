@@ -17,9 +17,19 @@ router.post('/', checkLogin, function (req, res, next) {
   const description = req.fields.description
   const price = parseInt(req.fields.price)
   const author = req.fields.author
-  const question = req.fields.question
-  const answer = req.fields.answer
-  const task = req.fields.task
+  const quetion = req.fields.question
+
+  const answer1 = req.fields.answer1
+  const answer2 = req.fields.answer2
+  const answer3 = req.fields.answer3
+  const answer4 = req.fields.answer4
+
+  const answersArray = []
+  answersArray.push(answer1, answer2, answer3, answer4)
+  const answers = answersArray.toString()
+
+  const answerRadio = req.fields.answerRadio
+
   const cover = req.files.cover.path.split(path.sep).pop()
   const vedio = req.files.vedio.path.split(path.sep).pop()
 
@@ -62,9 +72,9 @@ router.post('/', checkLogin, function (req, res, next) {
     author: author,
     cover: cover,
     vedio: vedio,
-    qestion : question,
-    answer: answer,
-    task: task
+    taskQuetion: quetion,
+    taskAnswer: answers,
+    answerRadio: answerRadio
   }
   // 课程信息写入数据库
   CourseModel.create(course)
