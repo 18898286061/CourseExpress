@@ -1,7 +1,9 @@
 <tr>
   <td><%= course.courseName %></td>
   <td><%= course.author %></td>
-  <td><img src="/img/<%- course.cover %>" alt="cover" width="100px"></td>
+  <td style="width: 100px; height: 45px; overflow: hidden; position: relative;" >
+    <img style="max-width: 100%; position: absolute; left: 0; top: 0; right: 0; bottom: 0; margin:auto" src="/img/<%- course.cover %>" alt="cover">
+  </td>
   <td><%= course.created_at %></td>
   <td><%= course.price %></td>
 

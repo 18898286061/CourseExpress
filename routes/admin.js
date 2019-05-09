@@ -1,5 +1,8 @@
 const express = require('express')
+const path = require('path')
 const router = express.Router()
+
+
 const PostModel = require('../models/posts')
 const CourseModel = require('../models/courses')
 const UserModel = require('../models/users')
@@ -112,6 +115,25 @@ router.post('/:courseId/courseEdit', checkAdminLogin, function (req, res, next) 
   const courseName = req.fields.courseName
   const author = req.fields.author
   const description = req.fields.description
+  const quetion = req.fields.question
+  const price = parseInt(req.fields.price)
+
+  const answer1 = req.fields.answer1
+  const answer2 = req.fields.answer2
+  const answer3 = req.fields.answer3
+  const answer4 = req.fields.answer4
+
+  // 答案处理逻辑代码
+  const answersArray = []
+  answersArray.push(answer1, answer2, answer3, answer4)
+  const answers = answersArray.toString()
+
+  const answerRadio = req.fields.answerRadio
+
+  console.log(req.fields+ '222')
+  console.log(req.files.editCover + '111')
+  const cover = req.files.editCover.path.split(path.sep).pop()
+  const vedio = req.files.editVedio.path.split(path.sep).pop()
 
   // 校验参数
   try {
@@ -131,7 +153,17 @@ router.post('/:courseId/courseEdit', checkAdminLogin, function (req, res, next) 
       if (!course) {
         throw new Error('该课程不存在')
       }
-      CourseModel.updateCourseById(courseId, { courseName: courseName, description: description, author: author })
+      CourseModel.updateCourseById(courseId,
+        { courseName: courseName,
+          description: description,
+          author: author,
+          price: price,
+          cover: cover,
+          vedio: vedio,
+          taskQuetion: quetion,
+          taskAnswer: answers,
+          answerRadio: answerRadio
+        })
         .then(function () {
           req.flash('success', '编辑课程成功')
           // 编辑成功后跳转到上一页

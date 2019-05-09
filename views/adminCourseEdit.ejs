@@ -6,14 +6,41 @@
   </div>
 
   <div class="eight wide column">
-    <form class="ui form segment" method="post" action="/admin/<%= course._id %>/courseEdit">
+    <!-- 不加multipart/form-data 上传文件会报错 -->
+    <form
+      class="ui form segment"
+      enctype="multipart/form-data"
+      method="post"
+      action="/admin/<%= course._id %>/courseEdit">
       <div class="field required">
         <label>课程名</label>
         <input type="text" name="courseName" value="<%= course.courseName %>">
       </div>
       <div class="field required">
+        <label>课程封面</label>
+        <input type="file" name="editCover">
+      </div>
+      <div class="field required">
+        <label>课程视频</label>
+        <input type="file" name="editVedio">
+      </div>
+
+
+      <div class="field required"><label>课堂作业</label>
+        <span>问题1</span><input placeholder="问题1" type="text" name="question" value="<%= course.taskQuetion %>">
+        <span>答案1</span><input placeholder="答案1" type="text" name="answer1"><input name="answerRadio" type="radio" value="answer1"/>
+        <span>答案2</span><input placeholder="答案2" type="text" name="answer2"><input name="answerRadio" type="radio" value="answer2"/>
+        <span>答案3</span><input placeholder="答案3" type="text" name="answer3"><input name="answerRadio" type="radio" value="answer3"/>
+        <span>答案4</span><input placeholder="答案4" type="text" name="answer4"><input name="answerrRadio" type="radio" avalue="answer4"/>
+      </div>
+
+      <div class="field required">
+        <label>价格</label>
+        <input placeholder="价格" type="number" name="price" value="<%= course.price %>">
+        </div>
+      <div class="field required">
         <label>作者</label>
-        <input type="text" name="author" value="<%= course.author %>">
+        <input type="text" name="author" value="<%= course.author %>" value="<%= course.author %>">
       </div>
       <div class="field required">
         <label>详情</label>

@@ -1,6 +1,8 @@
 <tr>
   <td><%= user.name %></td>
-  <td><img src="/img/<%= user.avatar %>" alt="cover" width="100px"></td>
+  <td style="width: 100px; height: 80px; overflow: hidden; position: relative;">
+    <img style="max-width: 100%; position: absolute; left: 0; top: 0; right: 0; bottom: 0; margin:auto" src="/img/<%= user.avatar %>" alt="cover">
+  </td>
   <td class="gender"><%= user.gender %></td>
   <td width="300"><%= user.bio %></td>
   <td>
