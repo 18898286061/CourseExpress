@@ -1,6 +1,69 @@
 <%- include('header') %>
 
 <style>
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700);
+/* General Buttons */
+button {
+  width: 130px;
+  height: 40px;
+  background: linear-gradient(to bottom, #4eb5e5 0%,#389ed5 100%); /* W3C */
+  border: none;
+  border-radius: 5px;
+  position: relative;
+  border-bottom: 4px solid #2b8bc6;
+  color: #fbfbfb;
+  font-weight: 600;
+  font-family: 'Open Sans', sans-serif;
+  text-shadow: 1px 1px 1px rgba(0,0,0,.4);
+  font-size: 15px;
+  text-align: left;
+  text-indent: 5px;
+  box-shadow: 0px 3px 0px 0px rgba(0,0,0,.2);
+  cursor: pointer;
+  outline: none;
+
+/* Just for presentation */
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+button:active {
+  box-shadow: 0px 2px 0px 0px rgba(0,0,0,.2);
+  top: 1px;
+}
+
+button:after {
+  content: "";
+  width: 0;
+  height: 0;
+  display: block;
+  border-top: 20px solid #187dbc;
+  border-bottom: 20px solid #187dbc;
+  border-left: 16px solid transparent;
+  border-right: 20px solid #187dbc;
+  position: absolute;
+  opacity: 0.6;
+  right: 0;
+  top: 0;
+  border-radius: 0 5px 5px 0;
+}
+
+/* Single buttons */
+
+button.site {
+  float: left;
+  margin: 0px 14px 14px;
+  width: 40px;
+  text-align: center;
+  text-indent: 0;
+}
+button.site:after{
+  display: none;
+}
+
+</style>
+
+<style>
 .buy{
   max-width: 700px;
   margin: 0 auto;
@@ -8,7 +71,7 @@
 }
 ul{
   list-style: none;
-  margin: 0;
+  margin: 14px 0px 0px 0px;
   padding: 0;
   font-size: 16px;
   line-height: 20px;
@@ -27,13 +90,14 @@ let leftWrapper =`
     margin-top: -16px;
     float: left;
     height: 100vh;">
-  <h2 style="text-align: center"><%= course.courseName %></h2>
+  <h2 style="text-align: center; margin-top: 30px;"><%= course.courseName %></h2>
   <div className="imgWrapper" style="margin: 0 auto; width: 150px; border-radius: 2px; overflow: hidden;">
     <img src="/img/<%= course.cover %>" style="width: 100%; border-radius: 6px;"/>
   </div>
-  <div style="border-radius: 6px";>
-    <div onclick=replaceVedio() style="cursor:pointer; margin:0 auto; text-align: center; height: 40px; line-height: 36px; font-size: 18px; width: 98%; background: #fff; border-bottom: 1px solid #efefef">视频课件</div>
-    <div onclick=replaceTask() style="cursor:pointer; margin:0 auto; text-align: center; height: 40px; line-height: 36px; font-size: 18px; width: 98%; background: #fff;">课堂作业</div>
+  <div style="border-radius: 6px; margin-top: 20px;">
+    <div class="changeCourse" onclick=replaceVedio() style="cursor:pointer; margin:0 auto; text-align: center; height: 40px; line-height: 36px; font-size: 18px; width: 98%; background: #eee; border-bottom: 1px solid #efefef">视频课件</div>
+    <div class="changeTask" onclick=replaceTask() style="cursor:pointer; margin:0 auto; text-align: center; height: 40px; line-height: 36px; font-size: 18px; width: 98%; background: #fff;">课堂作业</div>
+    <div style="color: #859295; font-size: 14px; padding: 0px 14px;">详情：<%- course.description %></div>
   </div>
 </div>
 `
@@ -41,12 +105,12 @@ document.getElementsByTagName('body')[0].innerHTML += leftWrapper
 </script>
 <div class="buy">
   <h1><%= course.courseName %></h1>
-  <div className="imgWrapper" style="width: 500px; height: 220px; border-radius: 2px; overflow: hidden;">
+  <div className="imgWrapper" style="border: 2px solid #ccc; border-radius: 4px; width: 500px; height: 220px; border-radius: 2px; overflow: hidden;">
     <img src="/img/<%= course.cover %>" style="width: 100%;"/>
   </div>
   <ul>
     <li>作者：<%= course.author %></li>
-    <li>详情：<%- course.description %></li>
+    <li style="color: #859295; font-size: 14px">详情：<%- course.description %></li>
     <li>购买价格：￥<%- course.price %></li>
     <li class="buyAmount"></li>
     <li style="color: red">提示：此课程你还未参加，请点击按钮立即参加</li>
@@ -69,10 +133,57 @@ let answers = '<%= course.taskAnswer %>'
 let answersArray = answers.split(',')
 
 var json = '<%= course.courseUser %>'
+
+let vedioArray = '<%= course.vedio %>'.split(',')
 var vedio = `
+<div class="right">
+<div class="courseNav" style="
+    margin: 30px auto 60px;
+    overflow: hidden;
+    width: 480px;">
+  <button class="site" onclick=backVedio1()>1</button>
+  <button class="site" onclick=replaceVedio2()>2</button>
+  <button class="site" onclick=replaceVedio3()>3</button>
+  <button class="site" onclick=replaceVedio4()>4</button>
+</div>
 <div class="vidioWrapper" style="width: 620px; margin: 0 auto; text-align: center">
   <video width="600" controls>
-    <source src="/img/<%= course.vedio %>" type="video/mp4">
+    <source src="/img/${vedioArray[0]}" type="video/mp4">
+    您的浏览器不支持 HTML5 video 标签
+  </video>
+</div>
+</div>
+`
+var backVedio = `
+<div class="vidioWrapper" style="width: 620px; margin: 0 auto; text-align: center">
+  <video width="600" controls>
+    <source src="/img/${vedioArray[0]}" type="video/mp4">
+    您的浏览器不支持 HTML5 video 标签
+  </video>
+</div>
+</div>
+`
+
+var vedio2 = `
+<div class="vidioWrapper" style="width: 620px; margin: 0 auto; text-align: center">
+  <video width="600" controls>
+    <source src="/img/${vedioArray[1]}" type="video/mp4">
+    您的浏览器不支持 HTML5 video 标签
+  </video>
+</div>
+`
+var vedio3 = `
+<div class="vidioWrapper" style="width: 620px; margin: 0 auto; text-align: center">
+  <video width="600" controls>
+    <source src="/img/${vedioArray[2]}" type="video/mp4">
+    您的浏览器不支持 HTML5 video 标签
+  </video>
+</div>
+`
+var vedio4 = `
+<div class="vidioWrapper" style="width: 620px; margin: 0 auto; text-align: center">
+  <video width="600" controls>
+    <source src="/img/${vedioArray[3]}" type="video/mp4">
     您的浏览器不支持 HTML5 video 标签
   </video>
 </div>
@@ -103,12 +214,27 @@ function submitTask() {
 }
 
 function replaceTask() {
-  console.log(2)
-  $('.vidioWrapper').replaceWith(courseTask)
+  $('.right').replaceWith(courseTask)
+  console.log($('.changeTask'))
+  $('.changeCourse').css({"background": "#fff"})
+  $('.changeTask').css({"background": "#eee"})
 }
 function replaceVedio() {
-  console.log(1)
   $('.courseTask').replaceWith(vedio)
+  $('.changeTask').css({"background": "#fff"})
+  $('.changeCourse').css({"background": "#eee"})
+}
+function backVedio1() {
+  $('.vidioWrapper').replaceWith(backVedio)
+}
+function replaceVedio2() {
+  $('.vidioWrapper').replaceWith(vedio2)
+}
+function replaceVedio3() {
+  $('.vidioWrapper').replaceWith(vedio3)
+}
+function replaceVedio4() {
+  $('.vidioWrapper').replaceWith(vedio4)
 }
 
 

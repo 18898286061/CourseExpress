@@ -1,24 +1,35 @@
 <%- include('header') %>
 <%- include('components/adminHeader') %>
 <div class="course-tabel">
-    <table class="ui celled table" id="table">
-      <thead>
-        <tr>
-          <th>帖子名称</th>
-          <th>作者</th>
-          <th>内容</th>
-          <th>创建时间</th>
-          <th>浏览量</th>
-          <th>操作</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% posts.forEach(function (post) { %>
-          <%- include('components/admin-postsContent', { post: post }) %>
-        <% }) %>
-      </tbody>
-    </table>
-  </div>
+  <table class="ui celled table"id="table">
+    <thead>
+      <tr>
+        <th>帖子名称</th>
+        <th>作者</th>
+        <th>内容</th>
+        <th>创建时间</th>
+        <th>浏览量</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% posts.forEach(function (post) { %>
+        <%- include('components/admin-postsContent', { post: post }) %>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<div
+class="echartsWrapper"
+id="echartsWrapper"
+style="
+  width: 600px;height:400px;
+  margin-top: 30px;
+">
+
+</div>
+
 <script>
 let a = document.querySelectorAll('a')
 for(var i = 0; i < a.length; i++) {
@@ -26,5 +37,36 @@ for(var i = 0; i < a.length; i++) {
     a[i].classList.add('active')
   }
 }
+// Echarts 代码
+
+// 基于准备好的dom，初始化echarts实例
+var myChart = echarts.init(document.getElementById('echartsWrapper'));
+
+// 指定图表的配置项和数据
+var option = {
+    title: {
+        text: '论坛帖子浏览量'
+    },
+    tooltip: {},
+    legend: {
+        data:['浏览量']
+    },
+    xAxis: {
+        axisLabel:{
+          interval: 0,
+          rotate:40
+        },
+        data:  ["关于面向对象程序设计——Java语言的练习题","大家好，这里是课程系统"]
+    },
+    yAxis: {},
+    series: [{
+        name: '浏览量',
+        type: 'bar',
+        data: [11, 23]
+    }]
+};
+
+// 使用刚指定的配置项和数据显示图表。
+myChart.setOption(option);
 </script>
 <%- include('footer') %>

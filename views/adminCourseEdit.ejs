@@ -1,5 +1,12 @@
 <%- include('header') %>
 
+<style>
+.answer {
+  margin-left: 6px;
+  padding-bottom: 2px;
+}
+</style>
+
 <div class="ui grid">
   <div class="four wide column">
 
@@ -28,10 +35,10 @@
 
       <div class="field required"><label>课堂作业</label>
         <span>问题1</span><input placeholder="问题1" type="text" name="question" value="<%= course.taskQuetion %>">
-        <span>答案1</span><input placeholder="答案1" type="text" name="answer1"><input name="answerRadio" type="radio" value="answer1"/>
-        <span>答案2</span><input placeholder="答案2" type="text" name="answer2"><input name="answerRadio" type="radio" value="answer2"/>
-        <span>答案3</span><input placeholder="答案3" type="text" name="answer3"><input name="answerRadio" type="radio" value="answer3"/>
-        <span>答案4</span><input placeholder="答案4" type="text" name="answer4"><input name="answerrRadio" type="radio" avalue="answer4"/>
+        <span>答案1</span><input class="answer" name="answerRadio" type="radio" value="answer1"/><input placeholder="答案1" type="text" name="answer1">
+        <span>答案2</span><input class="answer" name="answerRadio" type="radio" value="answer2"/><input placeholder="答案2" type="text" name="answer2">
+        <span>答案3</span><input class="answer" name="answerRadio" type="radio" value="answer3"/><input placeholder="答案3" type="text" name="answer3">
+        <span>答案4</span><input class="answer" name="answerrRadio" type="radio" avalue="answer4"/><input placeholder="答案4" type="text" name="answer4">
       </div>
 
       <div class="field required">

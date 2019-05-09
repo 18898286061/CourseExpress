@@ -31,7 +31,15 @@ router.post('/', checkLogin, function (req, res, next) {
   const answerRadio = req.fields.answerRadio
 
   const cover = req.files.cover.path.split(path.sep).pop()
-  const vedio = req.files.vedio.path.split(path.sep).pop()
+
+  // 视频
+  const vedio1 = req.files.vedio1.path.split(path.sep).pop()
+  const vedio2 = req.files.vedio2.path.split(path.sep).pop()
+  const vedio3 = req.files.vedio3.path.split(path.sep).pop()
+  const vedio4 = req.files.vedio4.path.split(path.sep).pop()
+
+  const vedioArray = [vedio1, vedio2, vedio3, vedio4]
+  const vedio = vedioArray.toString()
 
   // 校验参数
   try {
@@ -71,10 +79,10 @@ router.post('/', checkLogin, function (req, res, next) {
     price: price,
     author: author,
     cover: cover,
-    vedio: vedio,
     taskQuetion: quetion,
     taskAnswer: answers,
-    answerRadio: answerRadio
+    answerRadio: answerRadio,
+    vedio: vedio
   }
   // 课程信息写入数据库
   CourseModel.create(course)
