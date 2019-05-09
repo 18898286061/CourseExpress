@@ -64,6 +64,9 @@ button.site:after{
 </style>
 
 <style>
+body {
+  position: relative;
+}
 .buy{
   max-width: 700px;
   margin: 0 auto;
@@ -85,11 +88,17 @@ li {
 <script>
 let leftWrapper =`
 <div class="LeftWrapper"
-    style="width: 200px;
-    background: #ddd;
-    margin-top: -16px;
-    float: left;
-    height: 100vh;">
+    style="
+      width: 200px;
+      background: #ddd;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      min-height: 100%;
+      height: auto;
+      padding-bottom: 999px;
+      margin-bottom: -999px;
+      overflow: hidden">
   <h2 style="text-align: center; margin-top: 30px;"><%= course.courseName %></h2>
   <div className="imgWrapper" style="margin: 0 auto; width: 150px; border-radius: 2px; overflow: hidden;">
     <img src="/img/<%= course.cover %>" style="width: 100%; border-radius: 6px;"/>
@@ -129,8 +138,11 @@ document.getElementsByTagName('body')[0].innerHTML += leftWrapper
 
 <script>
 // 作业代码
-let answers = '<%= course.taskAnswer %>'
-let answersArray = answers.split(',')
+let questionArray = '<%= course.taskQuetion %>'.split(',')
+
+let answerRadioArray = '<%= course.answerRadio %>'.split(',')
+
+let answersArray = '<%= course.taskAnswer %>'.split(',')
 
 var json = '<%= course.courseUser %>'
 
@@ -192,30 +204,95 @@ var vedio4 = `
 const courseTask = `
 <div class="courseTask" style="margin: 0px auto; max-width: 700px">
   <h1 style="">课堂作业</h1>
-  <h2 style=""><%= course.taskQuetion %></h2>
+  <h4 style="">${questionArray[0]}</h4>
   <div class="answerWrapper" style="margin: 0 auto">
     <p><input type="radio" name="choose" data-type="answer1" style="margin-right: 8px;"/>${answersArray[0]}</p>
     <p><input type="radio" name="choose" data-type="answer2" style="margin-right: 8px;"/>${answersArray[1]}</p>
     <p><input type="radio" name="choose" data-type="answer3" style="margin-right: 8px;"/>${answersArray[2]}</p>
     <p><input type="radio" name="choose" data-type="answer4" style="margin-right: 8px;"/>${answersArray[3]}</p>
   </div>
+  <h4 style="">${questionArray[1]}</h4>
+  <div class="answerWrapper" style="margin: 0 auto">
+    <p><input type="radio" name="choose2" data-type="answer5" style="margin-right: 8px;"/>${answersArray[4]}</p>
+    <p><input type="radio" name="choose2" data-type="answer6" style="margin-right: 8px;"/>${answersArray[5]}</p>
+    <p><input type="radio" name="choose2" data-type="answer7" style="margin-right: 8px;"/>${answersArray[6]}</p>
+    <p><input type="radio" name="choose2" data-type="answer8" style="margin-right: 8px;"/>${answersArray[8]}</p>
+  </div>
+  <h4 style="">${questionArray[2]}</h4>
+  <div class="answerWrapper" style="margin: 0 auto">
+    <p><input type="radio" name="choose3" data-type="answer9" style="margin-right: 8px;"/>${answersArray[8]}</p>
+    <p><input type="radio" name="choose3" data-type="answer10" style="margin-right: 8px;"/>${answersArray[9]}</p>
+    <p><input type="radio" name="choose3" data-type="answer11" style="margin-right: 8px;"/>${answersArray[10]}</p>
+    <p><input type="radio" name="choose3" data-type="answer12" style="margin-right: 8px;"/>${answersArray[11]}</p>
+  </div>
+  <h4 style="">${questionArray[3]}</h4>
+  <div class="answerWrapper" style="margin: 0 auto">
+    <p><input type="radio" name="choose4" data-type="answer13" style="margin-right: 8px;"/>${answersArray[12]}</p>
+    <p><input type="radio" name="choose4" data-type="answer14" style="margin-right: 8px;"/>${answersArray[13]}</p>
+    <p><input type="radio" name="choose4" data-type="answer15" style="margin-right: 8px;"/>${answersArray[14]}</p>
+    <p><input type="radio" name="choose4" data-type="answer16" style="margin-right: 8px;"/>${answersArray[15]}</p>
+  </div>
   <button onclick=submitTask() style="margin-top: 20px;">提交</button>
 </div>
 `
 // 判断看看里面的data atributte 是否和 数据库的答案相等
+let score = 0
 
 function submitTask() {
   let inputArr = document.querySelectorAll('input')
-  for (var i = 0; i < inputArr.length; i++) {
+  for (var i = 0; i < 4; i++) {
     if (inputArr[i].checked == true) {
-      inputArr[i].dataset.type === '<%= course.answerRadio %>' ? alert('正确') : alert('错误')
+      if(inputArr[i].dataset.type === answerRadioArray[0]){
+        score+= 25
+        break;
+      }else {
+        $('.courseTask').find('p')[i].style.background="pink"
+        $('.courseTask').find('p')[i].innerHTML += "错误"
+        break;
+      }
     }
   }
+  for (var i = 4; i < 8; i++) {
+    if (inputArr[i].checked == true) {
+      if(inputArr[i].dataset.type === answerRadioArray[1]){
+        score+= 25
+        break;
+      }else {
+        $('.courseTask').find('p')[i].style.background="pink"
+        $('.courseTask').find('p')[i].innerHTML += "错误"
+        break;
+      }
+    }
+  }
+  for (var i = 8; i < 12; i++) {
+    if (inputArr[i].checked == true) {
+      if(inputArr[i].dataset.type === answerRadioArray[2]){
+        score+= 25
+        break;
+      }else {
+        $('.courseTask').find('p')[i].style.background="pink"
+        $('.courseTask').find('p')[i].innerHTML += "错误"
+        break;
+      }
+    }
+  }
+  for (var i = 12; i < 16; i++) {
+    if (inputArr[i].checked == true) {
+      if(inputArr[i].dataset.type === answerRadioArray[3]){
+        score+= 25
+        break;
+      }else {
+        $('.courseTask').find('p')[i].style.background="pink"
+        $('.courseTask').find('p')[i].innerHTML += "错误"
+        break;
+      }
+    }
+  }
+  $('.courseTask').append(`<div>总得分：${score}</div>`)
 }
 
 function replaceTask() {
   $('.right').replaceWith(courseTask)
-  console.log($('.changeTask'))
   $('.changeCourse').css({"background": "#fff"})
   $('.changeTask').css({"background": "#eee"})
 }
