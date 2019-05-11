@@ -1,71 +1,10 @@
 <%- include('header') %>
-
-<style>
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700);
-/* General Buttons */
-button {
-  width: 130px;
-  height: 40px;
-  background: linear-gradient(to bottom, #4eb5e5 0%,#389ed5 100%); /* W3C */
-  border: none;
-  border-radius: 5px;
-  position: relative;
-  border-bottom: 4px solid #2b8bc6;
-  color: #fbfbfb;
-  font-weight: 600;
-  font-family: 'Open Sans', sans-serif;
-  text-shadow: 1px 1px 1px rgba(0,0,0,.4);
-  font-size: 15px;
-  text-align: left;
-  text-indent: 5px;
-  box-shadow: 0px 3px 0px 0px rgba(0,0,0,.2);
-  cursor: pointer;
-  outline: none;
-
-/* Just for presentation */
-  display: block;
-  margin: 0 auto;
-  margin-bottom: 20px;
-}
-button:active {
-  box-shadow: 0px 2px 0px 0px rgba(0,0,0,.2);
-  top: 1px;
-}
-
-button:after {
-  content: "";
-  width: 0;
-  height: 0;
-  display: block;
-  border-top: 20px solid #187dbc;
-  border-bottom: 20px solid #187dbc;
-  border-left: 16px solid transparent;
-  border-right: 20px solid #187dbc;
-  position: absolute;
-  opacity: 0.6;
-  right: 0;
-  top: 0;
-  border-radius: 0 5px 5px 0;
-}
-
-/* Single buttons */
-
-button.site {
-  float: left;
-  margin: 0px 14px 14px;
-  width: 40px;
-  text-align: center;
-  text-indent: 0;
-}
-button.site:after{
-  display: none;
-}
-
-</style>
-
 <style>
 body {
   position: relative;
+}
+p {
+  padding-left: 4px;
 }
 .buy{
   max-width: 700px;
@@ -104,9 +43,9 @@ let leftWrapper =`
     <img src="/img/<%= course.cover %>" style="width: 100%; border-radius: 6px;"/>
   </div>
   <div style="border-radius: 6px; margin-top: 20px;">
-    <div class="changeCourse" onclick=replaceVedio() style="cursor:pointer; margin:0 auto; text-align: center; height: 40px; line-height: 36px; font-size: 18px; width: 98%; background: #eee; border-bottom: 1px solid #efefef">视频课件</div>
+    <div class="changeCourse" onclick=replaceVedio() style="cursor:pointer; margin:0 auto; text-align: center; height: 40px; line-height: 36px; font-size: 18px; width: 98%; background: #55b929; border-bottom: 1px solid #efefef">视频课件</div>
     <div class="changeTask" onclick=replaceTask() style="cursor:pointer; margin:0 auto; text-align: center; height: 40px; line-height: 36px; font-size: 18px; width: 98%; background: #fff;">课堂作业</div>
-    <div style="color: #859295; font-size: 14px; padding: 0px 14px;">详情：<%- course.description %></div>
+    <div style="color: #859295; font-size: 14px; padding: 14px 14px 0px;">详情：<%- course.description %></div>
   </div>
 </div>
 `
@@ -127,11 +66,11 @@ document.getElementsByTagName('body')[0].innerHTML += leftWrapper
   <div class="ui vertical animated button" tabindex="0">
     <div class="hidden content">
       <form method="post">
-        <input type="submit" class="ui button" value="支付">
+        <input type="submit" class="ui button" value="添加">
       </form>
     </div>
     <div class="visible content">
-        <i class="shop icon"></i>
+        +
     </div>
   </div>
 </div>
@@ -150,13 +89,14 @@ let vedioArray = '<%= course.vedio %>'.split(',')
 var vedio = `
 <div class="right">
 <div class="courseNav" style="
-    margin: 30px auto 60px;
+    margin: 30px auto 20px;
     overflow: hidden;
-    width: 480px;">
-  <button class="site" onclick=backVedio1()>1</button>
-  <button class="site" onclick=replaceVedio2()>2</button>
-  <button class="site" onclick=replaceVedio3()>3</button>
-  <button class="site" onclick=replaceVedio4()>4</button>
+    width: 400px;">
+
+  <button class="ui primary button" style="margin: 0 6px 0px 6px;" onclick=backVedio1()>第一章</button>
+  <button class="ui primary button" style="margin: 0 6px 0px 6px;" onclick=replaceVedio2()>第二章</button>
+  <button class="ui primary button" style="margin: 0 6px 0px 6px;" onclick=replaceVedio3()>第三章</button>
+  <button class="ui primary button" style="margin: 0 6px 0px 6px;" onclick=replaceVedio4()>第四章</button>
 </div>
 <div class="vidioWrapper" style="width: 620px; margin: 0 auto; text-align: center">
   <video width="600" controls>
@@ -216,7 +156,7 @@ const courseTask = `
     <p><input type="radio" name="choose2" data-type="answer5" style="margin-right: 8px;"/>${answersArray[4]}</p>
     <p><input type="radio" name="choose2" data-type="answer6" style="margin-right: 8px;"/>${answersArray[5]}</p>
     <p><input type="radio" name="choose2" data-type="answer7" style="margin-right: 8px;"/>${answersArray[6]}</p>
-    <p><input type="radio" name="choose2" data-type="answer8" style="margin-right: 8px;"/>${answersArray[8]}</p>
+    <p><input type="radio" name="choose2" data-type="answer8" style="margin-right: 8px;"/>${answersArray[7]}</p>
   </div>
   <h4 style="">${questionArray[2]}</h4>
   <div class="answerWrapper" style="margin: 0 auto">
@@ -246,7 +186,7 @@ function submitTask() {
         score+= 25
         break;
       }else {
-        $('.courseTask').find('p')[i].style.background="pink"
+        $('.courseTask').find('p')[i].style.background="yellow"
         $('.courseTask').find('p')[i].innerHTML += "错误"
         break;
       }
@@ -258,7 +198,7 @@ function submitTask() {
         score+= 25
         break;
       }else {
-        $('.courseTask').find('p')[i].style.background="pink"
+        $('.courseTask').find('p')[i].style.background="yellow"
         $('.courseTask').find('p')[i].innerHTML += "错误"
         break;
       }
@@ -270,7 +210,7 @@ function submitTask() {
         score+= 25
         break;
       }else {
-        $('.courseTask').find('p')[i].style.background="pink"
+        $('.courseTask').find('p')[i].style.background="yellow"
         $('.courseTask').find('p')[i].innerHTML += "错误"
         break;
       }
@@ -282,24 +222,29 @@ function submitTask() {
         score+= 25
         break;
       }else {
-        $('.courseTask').find('p')[i].style.background="pink"
+        $('.courseTask').find('p')[i].style.background="yellow"
         $('.courseTask').find('p')[i].innerHTML += "错误"
         break;
       }
     }
   }
-  $('.courseTask').append(`<div>总得分：${score}</div>`)
+  $('.courseTask').append(`<div style="position: absolute;
+    right: 130px;
+    bottom: -100px;
+    color: green;
+    font-size: 20px;
+    font-weight: 700;">总得分：${score}</div>`)
 }
 
 function replaceTask() {
   $('.right').replaceWith(courseTask)
   $('.changeCourse').css({"background": "#fff"})
-  $('.changeTask').css({"background": "#eee"})
+  $('.changeTask').css({"background": "#55b929"})
 }
 function replaceVedio() {
   $('.courseTask').replaceWith(vedio)
   $('.changeTask').css({"background": "#fff"})
-  $('.changeCourse').css({"background": "#eee"})
+  $('.changeCourse').css({"background": "#55b929"})
 }
 function backVedio1() {
   $('.vidioWrapper').replaceWith(backVedio)

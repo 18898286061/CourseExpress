@@ -14,11 +14,11 @@
 // 把全部性别变成数组
 // 遍历， 若是f 则替换成女
 if($('.gender').text() === 'f') {
-  $('.gender').replaceWith('<td>女</td>')
+  $('.gender').replaceWith('<td class="sex">女</td>')
 } else if ($('.gender').text() === 'x') {
-  $('.gender').replaceWith('<td>保密</td>')
+  $('.gender').replaceWith('<td class="sex">保密</td>')
 } else {
-  $('.gender').replaceWith('<td>男</td>')
+  $('.gender').replaceWith('<td class="sex">男</td>')
 }
 
 </script>

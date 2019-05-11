@@ -67,10 +67,10 @@ router.post('/', checkLogin, function (req, res, next) {
   // 校验参数
   try {
     if (!(courseName.length >= 1 && courseName.length <= 30)) {
-      throw new Error('名字请限制在 1-30 个字符')
+      throw new Error('标题请限制在 1-30 个字符')
     }
     if (!(description.length >= 1 && description.length <= 100)) {
-      throw new Error('个人简介请限制在 1-50 个字符')
+      throw new Error('描述请限制在 1-50 个字符')
     }
     if (!req.files.cover.name) {
       throw new Error('缺少封面')

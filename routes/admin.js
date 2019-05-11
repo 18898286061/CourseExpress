@@ -115,25 +115,53 @@ router.post('/:courseId/courseEdit', checkAdminLogin, function (req, res, next) 
   const courseName = req.fields.courseName
   const author = req.fields.author
   const description = req.fields.description
-  const quetion = req.fields.question
   const price = parseInt(req.fields.price)
+
+  const quetion1 = req.fields.question
+  const quetion2 = req.fields.question2
+  const quetion3 = req.fields.question3
+  const quetion4 = req.fields.question4
+  const questionRadioArray = [quetion1, quetion2, quetion3, quetion4]
+  const questionRadioStr = questionRadioArray.toString()
 
   const answer1 = req.fields.answer1
   const answer2 = req.fields.answer2
   const answer3 = req.fields.answer3
   const answer4 = req.fields.answer4
+  const answer5 = req.fields.answer5
+  const answer6 = req.fields.answer6
+  const answer7 = req.fields.answer7
+  const answer8 = req.fields.answer8
+  const answer9 = req.fields.answer9
+  const answer10 = req.fields.answer10
+  const answer11 = req.fields.answer11
+  const answer12 = req.fields.answer12
+  const answer13 = req.fields.answer13
+  const answer14 = req.fields.answer14
+  const answer15 = req.fields.answer15
+  const answer16 = req.fields.answer16
 
   // 答案处理逻辑代码
   const answersArray = []
-  answersArray.push(answer1, answer2, answer3, answer4)
+  answersArray.push(answer1, answer2, answer3, answer4, answer5,  answer6, answer7,  answer8,  answer9,  answer10,  answer11,  answer12,  answer13,  answer14,  answer15, answer16,)
   const answers = answersArray.toString()
 
-  const answerRadio = req.fields.answerRadio
+  answerRadio1 = req.fields.answerRadio
+  answerRadio2 = req.fields.answerRadio2
+  answerRadio3 = req.fields.answerRadio3
+  answerRadio4 = req.fields.answerRadio4
+  const answerRadioArray = [answerRadio1, answerRadio2, answerRadio3, answerRadio4]
+  const answerRadioStr = answerRadioArray.toString()
 
-  console.log(req.fields+ '222')
-  console.log(req.files.editCover + '111')
+
   const cover = req.files.editCover.path.split(path.sep).pop()
-  const vedio = req.files.editVedio.path.split(path.sep).pop()
+
+  const vedio1 = req.files.editVedio.path.split(path.sep).pop()
+  const vedio2 = req.files.editVedio2.path.split(path.sep).pop()
+  const vedio3 = req.files.editVedio3.path.split(path.sep).pop()
+  const vedio4 = req.files.editVedio4.path.split(path.sep).pop()
+  const vedioArray = [vedio1, vedio2, vedio3, vedio4]
+  const vedioStr = vedioArray.toString()
 
   // 校验参数
   try {
@@ -159,10 +187,10 @@ router.post('/:courseId/courseEdit', checkAdminLogin, function (req, res, next) 
           author: author,
           price: price,
           cover: cover,
-          vedio: vedio,
-          taskQuetion: quetion,
+          vedio: vedioStr,
+          taskQuetion: questionRadioStr,
           taskAnswer: answers,
-          answerRadio: answerRadio
+          answerRadio: answerRadioStr
         })
         .then(function () {
           req.flash('success', '编辑课程成功')

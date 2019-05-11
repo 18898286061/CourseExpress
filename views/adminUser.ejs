@@ -1,6 +1,11 @@
 <%- include('header') %>
 <%- include('components/adminHeader') %>
-<div class="course-tabel">
+<div class="ui secondary menu" style="margin: 0px 4px 0px 6px; float: left;">
+  <div class="active item">表格</div>
+  <div onclick=replaceImg() class="item">统计图</div>
+</div>
+
+<div style= "margin-top: 6px" class="course-tabel">
     <table class="ui celled table" id="table">
       <thead>
         <tr>
@@ -19,5 +24,52 @@
     </table>
   </div>
 
+<script type="text/javascript">
+  var genderArr = document.getElementsByClassName('sex')
+  console.log(genderArr)
+  let man = 0
+  let women = 0
+  let secret = 0
+  for(var i=0; i<genderArr.length; i++) {
+    if(genderArr[i].textContent === "男") {
+      man += 1
+    } else if (genderArr[i].textContent === "女") {
+      women += 1
+    } else if (genderArr[i].textContent === "保密") {
+      secret += 1
+    }
+  }
+  console.log(man, women, secret)
 
+function replaceImg() {
+  $('#table').replaceWith(imgWrapper)
+  var mainWrapper = document.getElementById("main")
+  var newScript = document.createElement('script');
+  newScript.type = 'text/javascript';
+  newScript.innerHTML = echartsJs;
+  mainWrapper.appendChild(newScript);
+}
+var imgWrapper = `<div id="main" style="width: 600px;height:400px; margin: 0 auto"></div>`;
+var echartsJs = `
+var myChart = echarts.init(document.getElementById('main'));
+option = {tooltip: {trigger: 'item',formatter: "{a} <br/>{b}: {c} ({d}%)"},
+    legend: {orient: 'vertical',x: 'left',data:['保密','男','女']},
+    series: [{
+            name:'访问来源',
+            type:'pie',
+            radius: ['50%', '70%'],
+            avoidLabelOverlap: false,
+            label: {normal: {show: false,position: 'center'},
+                emphasis: {show: true,textStyle: {fontSize: '30',fontWeight: 'bold'}}},
+            labelLine: {normal: {show: false}},
+            data:[
+                {value:secret, name:'保密'},
+                {value:man, name:'男'},
+                {value:women, name:'女'}
+            ]
+        }
+    ]
+};
+myChart.setOption(option);`
+</script>
 <%- include('footer') %>

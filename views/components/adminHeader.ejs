@@ -55,13 +55,9 @@ let prompt = document.querySelector('.prompt')
 
 
 var table = document.getElementById('table')
-console.log(table.rows.length)
-console.log(table.rows)
-console.dir(table.rows[0].innerText)
 
 var trs = table.rows
 var trsArr = [...trs] // HTMLCollection转换为数组
-console.log(trsArr)
 
 prompt.addEventListener("keyup", function (event) {
   if (event.keyCode === 13) {

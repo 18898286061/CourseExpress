@@ -1,5 +1,10 @@
 <%- include('header') %>
 <%- include('components/adminHeader') %>
+<div class="ui secondary menu" style="margin: 0px 4px 0px 6px; float: left;">
+  <div class="active item">表格</div>
+  <div onclick=replaceImg() class="item" style="cursor: pointer">统计图</div>
+</div>
+
 
 <div style= "margin-top: 2px" class="course-tabel">
     <div class="clearfix">
@@ -23,23 +28,23 @@
         </tr>
       </thead>
       <tbody>
-        <% course.forEach(function (course) { %>
+        <% course.forEach(function (course) {%>
           <%- include('components/admin-courseContent', { course: course }) %>
         <% }) %>
       </tbody>
     </table>
   </div>
-  <div
-    class="echartsWrapper"
-    id="echartsWrapper"
-    style="
-      width: 600px;height:400px;
-      margin-top: 30px;
-    ">
 
-  </div>
 
-<script>
+  <% course.forEach(function(item) { %>
+    <li class="courseNames" style="display: none;"><%=item.courseName %></li>
+  <% }) %>
+  <% course.forEach(function(item) { %>
+    <li class="courseManNumber" style="display: none;"><%=item.courseUser.length %></li>
+  <% }) %>
+  <!-- 这段循环是为了创建出不显示的Dom以做统计图 -->
+
+<script type="text/javascript">
 let a = document.querySelectorAll('a')
 for(var i = 0; i < a.length; i++) {
   if(a[i].pathname === window.location.pathname){
@@ -47,36 +52,37 @@ for(var i = 0; i < a.length; i++) {
   }
 }
 
-// Echarts 代码
+var liManNumberArr = document.getElementsByClassName('courseManNumber') // 获取课程人数数组
+var manNumberArr = []
+for(var i=0; i<liManNumberArr.length; i++) {
+  manNumberArr.push(liManNumberArr[i].textContent)
+}
 
-// 基于准备好的dom，初始化echarts实例
-var myChart = echarts.init(document.getElementById('echartsWrapper'));
+var lisArr = document.getElementsByClassName('courseNames') // 获取课程标题数组
+var courseNamesArr = []
+for(var i=0; i<lisArr.length; i++) {
+  courseNamesArr.push(lisArr[i].textContent)
+}
+// var dataTem = {axisLabel:{interval: 0,rotate:25}, data: courseNamesArr}
 
-// 指定图表的配置项和数据
-var option = {
-    title: {
-        text: '每门课程所参加人数'
-    },
+function replaceImg() {
+  $('#table').replaceWith(imgWrapper)
+  var mainWrapper = document.getElementById("main")
+  var newScript = document.createElement('script');
+  newScript.type = 'text/javascript';
+  newScript.innerHTML = echartsJs;
+  mainWrapper.appendChild(newScript);
+}
+var imgWrapper = `<div id="main" style="width: 600px;height:400px; margin: 0 auto"></div>`;
+var echartsJs = `
+var myChart = echarts.init(document.getElementById('main'));
+var option = {title: {text: '购买人数统计图'},
     tooltip: {},
-    legend: {
-        data:['购买人数']
-    },
-    xAxis: {
-        axisLabel:{
-          interval: 0,
-          rotate:40
-        },
-        data:  ["计算机网络应用","面向对象程序设计——Java语言","数据库原理与应用","软件工程基础"]
-    },
+    legend: {data:['参加人数']},
+    xAxis: {axisLabel:{interval: 0,rotate:25}, data: courseNamesArr},
     yAxis: {},
-    series: [{
-        name: '购买人数',
-        type: 'bar',
-        data: [1, 3, 2, 3]
-    }]
-};
-
-// 使用刚指定的配置项和数据显示图表。
+    series: [{name: '参加人数',type: 'bar',data: manNumberArr}]};
 myChart.setOption(option);
+`
 </script>
 <%- include('footer') %>

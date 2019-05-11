@@ -1,6 +1,10 @@
 <%- include('header') %>
 <%- include('components/adminHeader') %>
-<div class="course-tabel">
+<div class="ui secondary menu" style="margin: 0px 4px 0px 6px; float: left;">
+  <div class="active item">表格</div>
+  <div onclick=replaceImg() class="item">统计图</div>
+</div>
+<div style= "margin-top: 2px" class="course-tabel">
   <table class="ui celled table"id="table">
     <thead>
       <tr>
@@ -19,16 +23,14 @@
     </tbody>
   </table>
 </div>
-
-<div
-class="echartsWrapper"
-id="echartsWrapper"
-style="
-  width: 600px;height:400px;
-  margin-top: 30px;
-">
-
 </div>
+
+<% posts.forEach(function(item) { %>
+  <li class="postNames" style="display: none;"><%=item.title %></li>
+<% }) %>
+<% posts.forEach(function(item) { %>
+  <li class="postPvs" style="display: none;"><%=item.pv %></li>
+<% }) %>
 
 <script>
 let a = document.querySelectorAll('a')
@@ -37,36 +39,47 @@ for(var i = 0; i < a.length; i++) {
     a[i].classList.add('active')
   }
 }
-// Echarts 代码
 
-// 基于准备好的dom，初始化echarts实例
-var myChart = echarts.init(document.getElementById('echartsWrapper'));
+var liPostNames = document.getElementsByClassName('postNames') // 获取课程人数数组
+var postNamesArr = []
+for(var i=0; i<liPostNames.length; i++) {
+  postNamesArr.push(liPostNames[i].textContent)
+}
 
-// 指定图表的配置项和数据
-var option = {
+var liPostPvs = document.getElementsByClassName('postPvs') // 获取课程标题数组
+var liPostPvsArr = []
+for(var i=0; i<liPostPvs.length; i++) {
+  liPostPvsArr.push(liPostPvs[i].textContent)
+}
+
+
+function replaceImg() {
+  $('#table').replaceWith(imgWrapper)
+  var mainWrapper = document.getElementById("main")
+  var newScript = document.createElement('script');
+  newScript.type = 'text/javascript';
+  newScript.innerHTML = echartsJs;
+  mainWrapper.appendChild(newScript);
+}
+var imgWrapper = `<div id="main" style="width: 600px;height:400px; margin: 0 auto"></div>`;
+var echartsJs = `
+var myChart = echarts.init(document.getElementById('main'));
+option = {
     title: {
-        text: '论坛帖子浏览量'
+        text: '论坛浏览量统计图'
     },
     tooltip: {},
     legend: {
         data:['浏览量']
     },
-    xAxis: {
-        axisLabel:{
-          interval: 0,
-          rotate:40
-        },
-        data:  ["关于面向对象程序设计——Java语言的练习题","大家好，这里是课程系统"]
-    },
+    xAxis: {axisLabel:{interval: 0,rotate:25},data: postNamesArr},
     yAxis: {},
     series: [{
         name: '浏览量',
         type: 'bar',
-        data: [11, 23]
+        data: liPostPvsArr
     }]
 };
-
-// 使用刚指定的配置项和数据显示图表。
-myChart.setOption(option);
+myChart.setOption(option);`
 </script>
 <%- include('footer') %>
